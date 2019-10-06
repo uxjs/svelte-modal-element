@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="modal.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      .open-button {
+        border: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: lightgreen;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 21px;
+      }
+    </style>
+    <title>Modal</title>
+  </head>
+  <body>
+    <button class="open-button">Open modal</button>
+
+    <modal-element width="800px" height="600px">
+      <h1>Header</h1>
+      <div style="padding-bottom: 20px;">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut modi, aperiam natus eius ipsa nemo ipsum temporibus
+        veniam, laborum mollitia voluptates! Voluptate facilis quas maiores magni, nisi nobis minima reprehenderit.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut modi, aperiam natus eius ipsa nemo ipsum temporibus
+        veniam, laborum mollitia voluptates! Voluptate facilis quas maiores magni, nisi nobis minima reprehenderit.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut modi, aperiam natus eius ipsa nemo ipsum temporibus
+        veniam, laborum mollitia voluptates! Voluptate facilis quas maiores magni, nisi nobis minima reprehenderit.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut modi, aperiam natus eius ipsa nemo ipsum temporibus
+        veniam, laborum mollitia voluptates! Voluptate facilis quas maiores magni, nisi nobis minima reprehenderit.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut modi, aperiam natus eius ipsa nemo ipsum temporibus
+        veniam, laborum mollitia voluptates! Voluptate facilis quas maiores magni, nisi nobis minima reprehenderit.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut modi, aperiam natus eius ipsa nemo ipsum temporibus
+        veniam, laborum mollitia voluptates! Voluptate facilis quas maiores magni, nisi nobis minima reprehenderit.
+      </div>
+    </modal-element>
+  </body>
+</html>
+
+<script>
+  var openButton = document.querySelector('.open-button');
+  var modal = document.querySelector('modal-element');
+
+  openButton.addEventListener('click', function() {
+    modal.setAttribute('show', 'true');
+  });
+</script>
