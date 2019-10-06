@@ -95,21 +95,11 @@ You will most likely encounter errors if you try to use a non-production build o
 
 ### Attributes
 
-`primary` | `success` | `warning` | `danger` | `dark` 
-
-These attributes apply a background and text color style similar to the bootstrap alerts. 
-
-*Note: You can also set your own colors. See CSS variables below.*
-
-![svelte-custom-element](https://res.cloudinary.com/gojutin/image/upload/w_300/v1557713022/create-svelte-site/svelte-custom-element-alert-box.png "svelte-custom-element")
-
-`fixed` 
-
-This attribute hides the close (X) button, which prevents users from being able to close the alert-box.
+`show` | `width` | `height`
 
 Example:
 ```html
-<alert-box primary fixed>Thanks for signing up!<alert-box>
+<modal-element show="true" width="600px" height="400px">Hello world!<modal-element>
 ```
 
 ### Slots
@@ -118,7 +108,7 @@ This custom element includes two slots:
 
 **The `default` slot**
 
-The `alert-box` message content will be placed in this slot.
+The `modal-element` content will be placed in this slot.
 
 **The `close` slot**
 
@@ -127,16 +117,16 @@ The `alert-box` message content will be placed in this slot.
  Example:
 
  ```html
-<alert-box>
-  The alert-box content in the default slot.
+<modal-element>
+  The modal-element content in the default slot.
   <small slot="close">Close</small>
-</alert-box>
+</modal-element>
  ```
 
 ### Events
 `close` 
 
-This event is triggered on non-fixed alert-boxes when the close (X) icon is clicked. The event can be subscribed to with an event listener, which allows the end user to handle showing and hiding of the alert-box as the close (X) icon is clicked. By leaving the display logic to the consumer, they are given full control to implement animations and display logic that fits their needs.
+This event is triggered on non-fixed modal when the close (X) icon is clicked. The event can be subscribed to with an event listener, which allows the end user to handle showing and hiding of the modal as the close (X) icon is clicked. By leaving the display logic to the consumer, they are given full control to implement animations and display logic that fits their needs.
 
 Example:
 ```js
