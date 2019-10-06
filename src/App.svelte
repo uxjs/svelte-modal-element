@@ -12,7 +12,7 @@
   function dispatchCloseEvent(e) {
     // 1. Create the custom event.
     const event = new CustomEvent("close", {
-      detail: `alert-box was closed.`,
+      detail: `modal-element was closed.`,
       bubbles: true,
       cancelable: true,
       composed: true // makes the event jump shadow DOM boundary
