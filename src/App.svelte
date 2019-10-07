@@ -1,4 +1,6 @@
 <script>
+  import { fade } from "svelte/transition";
+
   export let id = "";
   export let show = false;
   export let width = "600px";
@@ -41,9 +43,6 @@
     background: white;
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.1);
   }
-  .closed {
-    display: none;
-  }
 
   .modal-overlay {
     position: fixed;
@@ -85,34 +84,33 @@ This tells the Svelte compiler that this file is a custom element.
 We also have to include the "customElement: true" compiler setting in rollup configuration.
 -->
 <svelte:options tag="modal-element" />
-<div
-  class="modal"
-  class:closed={!show}
-  style="width: {width}; height: {height}"
-  id="modal">
 
-  <div class="modal-guts">
+{#if show}
+  <div
+    transition:fade={{ duration: 350 }}
+    class="modal"
+    style="width: {width}; height: {height}"
+    id="modal">
 
-    <slot />
+    <div class="modal-guts">
+
+      <slot />
+    </div>
+
+    <span class="close-button" on:click={close} role="button">
+      <slot name="close">
+        <svg
+          height="12px"
+          width="12px"
+          viewBox="0 0 47.971 47.971"
+          style="enable-background:new 0 0 47.971 47.971;">
+          <g>
+            <path d={closePath} />
+          </g>
+        </svg>
+      </slot>
+    </span>
   </div>
 
-  <span class="close-button" on:click={close} role="button">
-    <slot name="close">
-      <svg
-        height="12px"
-        width="12px"
-        viewBox="0 0 47.971 47.971"
-        style="enable-background:new 0 0 47.971 47.971;">
-        <g>
-          <path d={closePath} />
-        </g>
-      </svg>
-    </slot>
-  </span>
-</div>
-
-<div
-  class="modal-overlay"
-  id="modal-overlay"
-  class:closed={!show}
-  on:click={close} />
+  <div class="modal-overlay" id="modal-overlay" on:click={close} />
+{/if}

@@ -1,3 +1,4 @@
+import replace from 'rollup-plugin-re';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -27,6 +28,22 @@ export default {
     // consult the documentation for details:
     // https://github.com/rollup/rollup-plugin-commonjs
     resolve(),
+    replace({
+      patterns: [
+        {
+          test: /document\.head\.appendChild\(style\)/,
+          replace: 'find_root(node).appendChild(style)',
+        },
+        {
+          test: /function noop\(\)/,
+          replace: `function find_root(element) {
+            const parent = element.parentNode;
+            return parent ? (parent.head ? parent.head : find_root(parent)) : element;
+          }
+            function noop()`,
+        },
+      ],
+    }),
     commonjs(),
 
     // Enable live reloading in development mode
