@@ -26,37 +26,13 @@
         font-size: 21px;
       }
     </style>
-    <title>Modal</title>
+    <title>TimePickerLAFD</title>
   </head>
   <body>
     <button class="open-button">Open modal</button>
 
     <modal-element width="800px" height="600px">
-      <h1>Janus</h1>
-      <div style="padding-bottom: 20px;">
-        hey now
-        
-        <!-- web-component-beg -->
-
-          <!-- hour headder -->
-          <div class="digital-container">
-            <span on:click={hour24panel} bind:this={hourdisplay} id="show-24-hour"
-              >12</span>
-            <!-- minutes headder -->
-            <span style="color:#c79395;">:</span>
-            <span on:click={minutepanel} bind:this={minutedisplay} id="show-minutes"
-              >27</span>
-          </div>
-
-
-<!-- nori -->
-<div> <input bind:this={hourTextBox} id='hourtime' type='text' name='shifttime' value="08" /> </div>
-<div> <input bind:this={minuteTextBox} id='minutetime' type='text' name='shifttime' value="00" /> </div>
-
-
-
-        <!-- web-component-end -->
-      </div>
+      <!-- magic happens in App.svelte -->
     </modal-element>
   </body>
 </html>
@@ -66,7 +42,9 @@
   var modal = document.querySelector('modal-element');
 
   openButton.addEventListener('click', function() {
-    modal.setAttribute('show', 'true');
+     modal.setAttribute('show', 'true');
+     modal.wonderful();
+
   });
 </script>
 
