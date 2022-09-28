@@ -19,17 +19,75 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: lightgreen;
+        background: rgb(181, 100, 100);
         color: white;
         padding: 10px 20px;
         border-radius: 10px;
         font-size: 21px;
       }
+
+      .comboBoxDur {
+        position: absolute;
+        top: 70%;
+        left: 35%;
+        transform: translate(-50%, -50%);
+        background: rgb(181, 100, 100);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        width: 15px;
+      }
+      
+      .comboBoxHour {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgb(181, 100, 100);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        width: 15px;
+      }
+      
+      .comboBoxMin {
+        position: absolute;
+        top: 70%;
+        left: 65%;
+        transform: translate(-50%, -50%);
+        background: rgb(181, 100, 100);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        width: 15px;
+      }
+      
+      .grid-container {
+        display: flex;
+        grid-template-columns: 140px 140px 140px;
+        grid-template-rows: auto;
+      }
+      
     </style>
     <title>TimePickerLAFD</title>
   </head>
   <body>
     <button class="open-button">Open modal</button>
+
+    <!-- comboBox-beg -->
+
+    <div class="grid-container">
+      
+      <input class="comboBoxDur" type="text" id="sduration" name="shift-duration">
+      <input class="comboBoxHour" type="text" id="shour" name="shift-hour">
+      <input class="comboBoxMin" type="text" id="smin" name="shift-min">
+
+    </div>
+
+    <!-- comboBox-end -->
 
     <modal-element width="800px" height="600px">
       <!-- magic happens in App.svelte -->
@@ -41,9 +99,23 @@
   var openButton = document.querySelector('.open-button');
   var modal = document.querySelector('modal-element');
 
+  
+  var cmboxdur = document.querySelector('.comboBoxDur');
+  var cmboxhour = document.querySelector('comboBoxHour');
+  var cmboxmin = document.querySelector('comboBoxMin');
+
+
   openButton.addEventListener('click', function() {
      modal.setAttribute('show', 'true');
-     modal.wonderful();
+     modal.initializeTimePicker();
+     
+
+  });
+
+  cmboxdur.addEventListener('click', function() {
+     modal.setAttribute('show', 'true');
+     modal.initializeTimePicker();
+     modal.setDuration(cmboxdur.value);
 
   });
 </script>

@@ -22,9 +22,20 @@ We also have to include the "customElement: true" compiler setting in rollup con
   export let minuteTextBox;
 
 
-  export function wonderful(){
+
+  export function setDuration() {
+    console.log("setDuration");
+    //console.log(hourTextBox.value);
+    //console.log(minuteTextBox.value);
+  }
+
+  export function initializeTimePicker(){
     hour24panel();
-    console.log('-- hour24panel --')
+    
+  }
+
+  export function talkback(){
+    console.log('---price is most important---')
   }
 
   function close(e) {
@@ -765,6 +776,8 @@ We also have to include the "customElement: true" compiler setting in rollup con
       <!-- nori: comboBox rough draft -->
       <div> <input bind:this={hourTextBox} id='hourtime' type='text' name='shifttime' value="08" /> </div>
       <div> <input bind:this={minuteTextBox} id='minutetime' type='text' name='shifttime' value="00" /> </div>
+
+
 
     
       <!-- end-of-wc -->
