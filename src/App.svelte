@@ -5,7 +5,7 @@ We also have to include the "customElement: true" compiler setting in rollup con
 <svelte:options tag="modal-element" />
 
 <script>
-  import { onMount, onDestroy } from "svelte";
+
   import { fade } from "svelte/transition";
 
   export let id = "";
@@ -18,27 +18,41 @@ We also have to include the "customElement: true" compiler setting in rollup con
   export let minutecard;
   export let minutedisplay;
   export let hourdisplay;
+  export let durTextBox;
   export let hourTextBox;
   export let minuteTextBox;
+  export let cmbBoxDuration;
+  export let cmbBoxHour;
+  export let cmbBoxMinute;
 
+  export function setDuration(cbdr, cbhr, cbmn) { 
+    //console.log(cbdr, cbhr, cbmn);
+    cmbBoxDuration = cbdr;
+    cmbBoxHour = cbhr;
+    cmbBoxMinute = cbmn;
+  }
 
+  export function setHour(){
+    console.log('---setHour is most important---')
+  }
 
-  export function setDuration() {
-    console.log("setDuration");
-    //console.log(hourTextBox.value);
-    //console.log(minuteTextBox.value);
+  export function setMin(){
+    console.log('---setHour is most important---')
   }
 
   export function initializeTimePicker(){
     hour24panel();
-    
-  }
-
-  export function talkback(){
-    console.log('---price is most important---')
   }
 
   function close(e) {
+    
+    cmbBoxDuration = durTextBox.value; //xxxx.value; //fix-me
+    cmbBoxHour = hourTextBox.value;
+    cmbBoxMinute = minuteTextBox.value;
+    
+    console.log(cmbBoxDuration, hourTextBox.value, minuteTextBox.value)
+
+    //nori
     dispatchCloseEvent.call(this, e);
     show = false;
   }
@@ -171,17 +185,6 @@ We also have to include the "customElement: true" compiler setting in rollup con
     minutedisplay.style.color = "white";
     hourdisplay.style.color = "#c79395";
   };
-
-  onMount(() => {
-
-    // -- migrate to the modal launch method
-    // hour24panel(); //initialize the app - show 24-hour panel
-    // hourTextBox.value='08'  //default shift start time(s) 08:00AM -- default unless otherwise specified
-  });
-
-  onDestroy(() => {
-    console.log("onDestroy");
-  });
 
   // ---------------------
   // MINUTE handlers
@@ -481,14 +484,11 @@ We also have to include the "customElement: true" compiler setting in rollup con
 
 {#if show}
 
-
-
 <div
     transition:fade={{ duration: 350 }}
     class="modal"
     style="width: {width}; height: {height}"
-    id="modal"
-    
+    id="modal" 
   >
     
   <div class="modal-guts">
@@ -769,23 +769,22 @@ We also have to include the "customElement: true" compiler setting in rollup con
           
         </div>
         
-        <button class="save-button">Save</button>
+        <button class="save-button" on:click={close}>Save</button>
       
       </div>
       
       <!-- nori: comboBox rough draft -->
-      <div> <input bind:this={hourTextBox} id='hourtime' type='text' name='shifttime' value="08" /> </div>
-      <div> <input bind:this={minuteTextBox} id='minutetime' type='text' name='shifttime' value="00" /> </div>
+      <div> <input bind:this={durTextBox} id='durtime' type='text' name='shiftdur' value="24" /> </div>
+      <div> <input bind:this={hourTextBox} id='hourtime' type='text' name='shifthour' value="08" /> </div>
+      <div> <input bind:this={minuteTextBox} id='minutetime' type='text' name='shiftminute' value="00" /> </div>
 
-
-
-    
       <!-- end-of-wc -->
 
       <slot />
     </div>
 
-    <span class="close-button" on:click={close} role="button">
+    <!-- // X close button
+      <span class="close-button" on:click={close} role="button">
       <slot name="close">
         <svg
           height="12px"
@@ -798,7 +797,10 @@ We also have to include the "customElement: true" compiler setting in rollup con
           </g>
         </svg>
       </slot>
-    </span>
+    </span> 
+    -->
+
+
   </div>
 
   <div class="modal-overlay" id="modal-overlay" on:click={close} />

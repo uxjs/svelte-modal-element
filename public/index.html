@@ -81,15 +81,15 @@
 
     <div class="grid-container">
       
-      <input class="comboBoxDur" type="text" id="sduration" name="shift-duration">
-      <input class="comboBoxHour" type="text" id="shour" name="shift-hour">
-      <input class="comboBoxMin" type="text" id="smin" name="shift-min">
+      <input class="comboBoxDur" type="text" id="sduration" name="shift-duration" value="27">
+      <input class="comboBoxHour" type="text" id="shour" name="shift-hour" value="08">
+      <input class="comboBoxMin" type="text" id="smin" name="shift-min" value="30">
 
     </div>
 
     <!-- comboBox-end -->
 
-    <modal-element width="800px" height="600px">
+    <modal-element width="390px" height="600px">
       <!-- magic happens in App.svelte -->
     </modal-element>
   </body>
@@ -100,23 +100,27 @@
   var modal = document.querySelector('modal-element');
 
   
-  var cmboxdur = document.querySelector('.comboBoxDur');
-  var cmboxhour = document.querySelector('comboBoxHour');
-  var cmboxmin = document.querySelector('comboBoxMin');
+  var cmboxdur = document.getElementById('sduration');
+  var cmboxhour = document.getElementById('shour');
+  var cmboxmin = document.getElementById('smin');
+  
 
+  // var cmboxhour = document.querySelector('comboBoxHour');
+  // var cmboxmin = document.querySelector('comboBoxMin');
 
+  
   openButton.addEventListener('click', function() {
      modal.setAttribute('show', 'true');
      modal.initializeTimePicker();
-     
 
   });
 
   cmboxdur.addEventListener('click', function() {
      modal.setAttribute('show', 'true');
      modal.initializeTimePicker();
-     modal.setDuration(cmboxdur.value);
+     modal.setDuration(cmboxdur, cmboxhour, cmboxmin);
 
+     //not the right event, you want to hook into the close event
   });
 </script>
 
