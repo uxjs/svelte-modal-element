@@ -13,7 +13,7 @@
         margin: 0;
       }
 
-      .open-button {
+      /* .open-button {
         border: 0;
         position: absolute;
         top: 50%;
@@ -24,7 +24,7 @@
         padding: 10px 20px;
         border-radius: 10px;
         font-size: 21px;
-      }
+      } */
 
       .comboBoxDur {
         position: absolute;
@@ -65,27 +65,48 @@
         width: 15px;
       }
       
-      .grid-container {
+      /* .grid-container {
         display: flex;
         grid-template-columns: 140px 140px 140px;
         grid-template-rows: auto;
-      }
+      } */
       
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 10px;
+        background-color: #2196F3;
+        padding: 10px;
+      }
+
+      .grid-container > div {
+        background-color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        padding: 20px 0;
+        font-size: 30px;
+    }
+
+    .item1 {
+      grid-column-start: 1;
+      grid-column-end: 1;
+}
+
     </style>
     <title>TimePickerLAFD</title>
   </head>
   <body>
-    <button class="open-button">Open modal</button>
+    
+    <!-- <button class="open-button">Open modal</button> -->
 
     <!-- comboBox-beg -->
 
-    <div class="grid-container">
-      
-      <input class="comboBoxDur" type="text" id="sduration" name="shift-duration" value="27">
-      <input class="comboBoxHour" type="text" id="shour" name="shift-hour" value="08">
-      <input class="comboBoxMin" type="text" id="smin" name="shift-min" value="30">
+    <!-- <div class="grid-container">
+    
+      <div><input class="comboBoxDur" type="text" id="sduration" name="shift-duration" value="28"></div>
+      <div><input class="comboBoxHour" type="text" id="shour" name="shift-hour" value="08"></div>
+      <div><input class="comboBoxMin" type="text" id="smin" name="shift-min" value="30"></div>
 
-    </div>
+    </div> -->
 
     <!-- comboBox-end -->
 
@@ -96,9 +117,8 @@
 </html>
 
 <script>
-  var openButton = document.querySelector('.open-button');
+  // var openButton = document.querySelector('.open-button');
   var modal = document.querySelector('modal-element');
-
   
   var cmboxdur = document.getElementById('sduration');
   var cmboxhour = document.getElementById('shour');
@@ -109,11 +129,11 @@
   // var cmboxmin = document.querySelector('comboBoxMin');
 
   
-  openButton.addEventListener('click', function() {
-     modal.setAttribute('show', 'true');
-     modal.initializeTimePicker();
+  // openButton.addEventListener('click', function() {
+  //    modal.setAttribute('show', 'true');
+  //    modal.initializeTimePicker();
 
-  });
+  // });
 
   cmboxdur.addEventListener('click', function() {
      modal.setAttribute('show', 'true');
@@ -122,6 +142,24 @@
 
      //not the right event, you want to hook into the close event
   });
+
+  cmboxhour.addEventListener('click', function() {
+     modal.setAttribute('show', 'true');
+     modal.initializeTimePicker();
+     modal.setDuration(cmboxdur, cmboxhour, cmboxmin);
+
+     //not the right event, you want to hook into the close event
+  });
+
+  cmboxmin.addEventListener('click', function() {
+     modal.setAttribute('show', 'true');
+     modal.initializeTimePicker();
+     modal.setDuration(cmboxdur, cmboxhour, cmboxmin);
+
+     //not the right event, you want to hook into the close event
+  });
+
+
 </script>
 
 
