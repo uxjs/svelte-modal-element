@@ -21,15 +21,17 @@ We also have to include the "customElement: true" compiler setting in rollup con
   export let durTextBox;
   export let hourTextBox;
   export let minuteTextBox;
-  export let cmbBoxDuration;
   export let cmbBoxHour;
   export let cmbBoxMinute;
 
   export function setDuration(cbdr, cbhr, cbmn) { 
-    //console.log(cbdr, cbhr, cbmn);
-    cmbBoxDuration = cbdr;
-    cmbBoxHour = cbhr;
-    cmbBoxMinute = cbmn;
+    console.log(cbdr.value, cbhr.value, cbmn.value);
+    
+    //document.getElementById('sduration').value = 14;
+   //document.getElementById('shour').value = hourTextBox.value;
+   //document.getElementById('smin').value = minuteTextBox.value;
+
+
   }
 
   export function setHour(){
@@ -45,14 +47,14 @@ We also have to include the "customElement: true" compiler setting in rollup con
   }
 
   function close(e) {
-    
-    cmbBoxDuration = durTextBox.value; //xxxx.value; //fix-me
-    cmbBoxHour = hourTextBox.value;
-    cmbBoxMinute = minuteTextBox.value;
-    
-    console.log(cmbBoxDuration, hourTextBox.value, minuteTextBox.value)
+ 
+    //console.log(durTextBox.value, hourTextBox.value, minuteTextBox.value) //debug
 
-    //nori
+    document.getElementById('sduration').value = durTextBox.value;
+    document.getElementById('shour').value = hourTextBox.value;
+    document.getElementById('smin').value = minuteTextBox.value;
+
+
     dispatchCloseEvent.call(this, e);
     show = false;
   }
@@ -773,7 +775,7 @@ We also have to include the "customElement: true" compiler setting in rollup con
       
       </div>
       
-      <!-- nori: comboBox rough draft -->
+      <!-- nori: these should be hidden or completely gone after development -->
       <div> <input bind:this={durTextBox} id='durtime' type='text' name='shiftdur' value="24" /> </div>
       <div> <input bind:this={hourTextBox} id='hourtime' type='text' name='shifthour' value="08" /> </div>
       <div> <input bind:this={minuteTextBox} id='minutetime' type='text' name='shiftminute' value="00" /> </div>
