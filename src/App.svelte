@@ -10,14 +10,15 @@ We also have to include the "customElement: true" compiler setting in rollup con
 
   export let id = "";
   export let show = false;
+  export let durationCapture = true;
   export let width = "600px";
   export let height = "400px";
-
   export let hour12card;
   export let hour24card;
   export let minutecard;
   export let minutedisplay;
   export let hourdisplay;
+  export let durationdisplay;
   export let durTextBox;
   export let hourTextBox;
   export let minuteTextBox;
@@ -25,22 +26,17 @@ We also have to include the "customElement: true" compiler setting in rollup con
   export let cmbBoxMinute;
 
   export function setDuration(cbdr, cbhr, cbmn) { 
-    console.log(cbdr.value, cbhr.value, cbmn.value);
     
-    //document.getElementById('sduration').value = 14;
-   //document.getElementById('shour').value = hourTextBox.value;
-   //document.getElementById('smin').value = minuteTextBox.value;
-
+    console.log(cbdr.value, cbhr.value, cbmn.value);
+    durTextBox.value = document.getElementById('sduration').value
+    hourTextBox.value = document.getElementById('shour').value
+    minuteTextBox.value = document.getElementById('smin').value
+    
+    hourdisplay.innerHTML = document.getElementById('shour').value
+    minutedisplay.innerHTML = document.getElementById('smin').value
 
   }
 
-  export function setHour(){
-    console.log('---setHour is most important---')
-  }
-
-  export function setMin(){
-    console.log('---setHour is most important---')
-  }
 
   export function initializeTimePicker(){
     hour24panel();
@@ -165,7 +161,11 @@ We also have to include the "customElement: true" compiler setting in rollup con
     selected_23h = "";
   };
 
-  const hour24panel = () => {
+
+  const durationpanel = () => {
+    console.log('asdf')
+   //$: durationCapture = !durationCapture;
+   durationCapture = true;
     hour12card.hidden = false;
     hour24card.hidden = false;
     minutecard.hidden = true;
@@ -176,7 +176,27 @@ We also have to include the "customElement: true" compiler setting in rollup con
 
     //Header Display
     minutedisplay.style.color = "#c79395";
+    hourdisplay.style.color = "#c79395";
+    durationdisplay.style.color = "white";
+
+  };
+
+
+  const hour24panel = () => {
+    durationCapture = false;
+    hour12card.hidden = false;
+    hour24card.hidden = false;
+    minutecard.hidden = true;
+
+    hour24card.style.color = "white";
+    minutecard.style.color = "#c79395";
+    hour12card.style.color = "green";
+
+    //Header Display
+    durationdisplay.style.color = "#c79395";
+    minutedisplay.style.color = "#c79395";
     hourdisplay.style.color = "white";
+
   }; //hour24panel
 
   const minutepanel = () => {
@@ -184,8 +204,9 @@ We also have to include the "customElement: true" compiler setting in rollup con
     hour12card.hidden = true;
     hour24card.hidden = true;
     minutecard.hidden = false;
-    minutedisplay.style.color = "white";
+    durationdisplay.style.color = "#c79395";
     hourdisplay.style.color = "#c79395";
+    minutedisplay.style.color = "white";
   };
 
   // ---------------------
@@ -482,6 +503,24 @@ We also have to include the "customElement: true" compiler setting in rollup con
     hourTextBox.value = "23";
     selected_23h = temp;
   };
+
+
+  // --------------------------
+  // DURATION handlers (1 - 24)
+  // --------------------------
+
+  const duration_00 = async () => {
+    let temp = selected_00h === "" ? "circle-me" : "";
+    await clearAllSelected();
+    durationdisplay.innerHTML = "00";
+    durTextBox.value = "00";
+    selected_00h = temp;
+  };
+
+
+
+
+
 </script>
 
 {#if show}
@@ -495,8 +534,14 @@ We also have to include the "customElement: true" compiler setting in rollup con
     
   <div class="modal-guts">
       <!-- beg-of-wc -->
+
       <!-- hour header -->
       <div class="digital-container">
+      
+        <span on:click={durationpanel} bind:this={durationdisplay} id="duration-digit">12</span>
+
+        <span style="color:#c79395;">:</span>
+
         <span on:click={hour24panel} bind:this={hourdisplay} id="show-24-hour"
           >12</span
         >
@@ -507,8 +552,14 @@ We also have to include the "customElement: true" compiler setting in rollup con
         >
       </div>
 
-      <div class="watch-container">
-        <div class="watch">
+    {#if show}
+
+    <div class="watch-container">
+      {#if durationCapture}
+      <div>hello</div>
+      {/if}
+      <div class="watch">
+        
           <card bind:this={hour12card} id="hour12-card">
             <div class="numbers">
               <span on:click={hour_9} style="float:left;" class={selected_09h} id="9h"
@@ -578,20 +629,18 @@ We also have to include the "customElement: true" compiler setting in rollup con
             </div>
       
             <div class="numbers" style="-webkit-transform:rotateZ(150deg);">
-              <span
-                on:click={hour_2}
+              <span on:click={hour_2}
                 style="float:left; -webkit-transform:rotateZ(-150deg);"
                 class={selected_02h}
-                id="2h">2</span
-              ><span
-                on:click={hour_8}
+                id="2h">2</span>
+                <span on:click={hour_8}
                 style="float:right; -webkit-transform:rotateZ(-150deg);"
                 class={selected_08h}
-                id="8h">8</span
-              >
+                id="8h">8</span>
             </div>
           </card>
-      
+
+
           <div class="inner-watch">
             <card bind:this={hour24card} id="hour24-card">
               <div class="numbers">
@@ -772,9 +821,13 @@ We also have to include the "customElement: true" compiler setting in rollup con
         </div>
         
         <button class="save-button" on:click={close}>Save</button>
-      
+       
       </div>
       
+      {/if}
+
+
+
       <!-- nori: these should be hidden or completely gone after development -->
       <div> <input bind:this={durTextBox} id='durtime' type='text' name='shiftdur' value="24" /> </div>
       <div> <input bind:this={hourTextBox} id='hourtime' type='text' name='shifthour' value="08" /> </div>
@@ -823,7 +876,6 @@ We also have to include the "customElement: true" compiler setting in rollup con
     background: white;
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.1);
   }
-
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -859,7 +911,6 @@ We also have to include the "customElement: true" compiler setting in rollup con
   }
 
   /* TimePicker below */
-
 
   .save-button {
     margin: auto;
