@@ -168,7 +168,6 @@ We also have to include the "customElement: true" compiler setting in rollup con
   const durationpanel = () => {
     console.log('asdf')
     
- 
    //$: durationCapture = !durationCapture;
 
    durationCapture = true;
@@ -181,9 +180,9 @@ We also have to include the "customElement: true" compiler setting in rollup con
     hour12card.style.color = "green";
 
     //Header Display
-    minutedisplay.style.color = "#eb4034";
-    hourdisplay.style.color = "#eb4034";
-    durationdisplay.style.color = "white";
+    minutedisplay.style.color = "#e3cc59";
+    hourdisplay.style.color = "#e3cc59";
+    durationdisplay.style.color = "#9853c9";
 
   };
 
@@ -199,9 +198,9 @@ We also have to include the "customElement: true" compiler setting in rollup con
     hour12card.style.color = "green";
 
     //Header Display
-    durationdisplay.style.color = "#eb4034";
-    minutedisplay.style.color = "#eb4034";
-    hourdisplay.style.color = "white";
+    durationdisplay.style.color = "#e3cc59";
+    minutedisplay.style.color = "#e3cc59";
+    hourdisplay.style.color = "#9853c9";
 
   }; //hour24panel
 
@@ -211,9 +210,9 @@ We also have to include the "customElement: true" compiler setting in rollup con
     hour12card.hidden = true;
     hour24card.hidden = true;
     minutecard.hidden = false;
-    durationdisplay.style.color = "#eb4034";
-    hourdisplay.style.color = "#eb4034";
-    minutedisplay.style.color = "white";
+    durationdisplay.style.color = "#e3cc59";
+    hourdisplay.style.color = "#e3cc59";
+    minutedisplay.style.color = "#9853c9";
   };
 
 
@@ -553,13 +552,14 @@ We also have to include the "customElement: true" compiler setting in rollup con
       
         <span on:click={durationpanel} bind:this={durationdisplay} id="duration-digit">24</span>
 
-        <span style="color:#c79395;">:</span>
+        <span style="color:#000000;">:</span>
 
         <span on:click={hour24panel} bind:this={hourdisplay} id="show-24-hour"
           >12</span
         >
         <!-- minutes headder -->
-        <span style="color:#c79395;">:</span>
+        <span style="color:#000000;">:</span>
+
         <span on:click={minutepanel} bind:this={minutedisplay} id="show-minutes"
           >27</span
         >
@@ -851,13 +851,18 @@ We also have to include the "customElement: true" compiler setting in rollup con
           
         </div>
         
-        <button class="save-button" on:click={close}>Save</button>
-       
+        <!-- <button class="save-button" on:click={close}>Sav2e</button> -->
+        
       </div>
-      
+     
+
+
       {/if}
 
 
+      <div>
+        <button class="save-button" on:click={close}>Save</button>
+      </div>
 
       <!-- nori: these should be hidden or completely gone after development -->
       <div> <input bind:this={durTextBox} id='durtime' type='text' name='shiftdur' value="24" hidden/> </div>
@@ -943,11 +948,18 @@ We also have to include the "customElement: true" compiler setting in rollup con
   /* TimePicker below */
 
   .save-button {
+
+    margin: 0;
+  position: absolute;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
     margin: auto;
     text-align: center;
-    width: 100%;
-    border: 3px solid navy;
+    width: 90%;
+    border: 2px solid navy;
     padding: 7px;
+    
   }
   .circle-me {
     position: relative;
@@ -972,7 +984,7 @@ We also have to include the "customElement: true" compiler setting in rollup con
     font-weight: bold;
     padding-bottom: 5px;
     /* border: 1px solid black; */
-    background-color: rgb(239, 224, 88);
+    /* background-color: rgb(239, 224, 88); */
   }
   body {
     font-family: "Roboto";
