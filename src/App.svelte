@@ -166,7 +166,7 @@ We also have to include the "customElement: true" compiler setting in rollup con
 
 
   const durationpanel = () => {
-    console.log('asdf')
+    //console.log('asdf')
     
    //$: durationCapture = !durationCapture;
 
@@ -177,7 +177,7 @@ We also have to include the "customElement: true" compiler setting in rollup con
 
     hour24card.style.color = "white";
     minutecard.style.color = "#c79395";
-    hour12card.style.color = "green";
+    hour12card.style.color = "purple";
 
     //Header Display
     minutedisplay.style.color = "#e3cc59";
@@ -999,8 +999,8 @@ We also have to include the "customElement: true" compiler setting in rollup con
   }
   .watch {
     position: absolute;
-    width: 90%;
-    height: 72%;
+    width: 95%;
+    height: 79%;
     border: 1px solid rgb(195, 209, 219);
     background-color: rgb(240, 242, 242);
     border-radius: 50%;
@@ -1009,7 +1009,7 @@ We also have to include the "customElement: true" compiler setting in rollup con
   }
   .inner-watch {
     position: relative;
-    width: 70%;
+    width: 68%;
     height: 70%;
     border-radius: 50%;
     background: rgb(195, 209, 219);
@@ -1020,8 +1020,8 @@ We also have to include the "customElement: true" compiler setting in rollup con
   .numbers {
     position: absolute;
     display: block;
-    height: 6%;
-    width: 90%;
+    height: 10%; /* 6 */
+    width: 99%;
     top: 44%;
     left: 0%;
     padding: 12px 16px;
